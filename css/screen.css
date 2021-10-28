@@ -15,6 +15,10 @@
   --global-html-color: var(--global-color-front);
   --global-html-backgroundColor: var(--global-color-back);
   --global-selection-backgroundColor: var(--global-color-front);
+  --c-robot-animation-duration: 0.75s;
+  --c-robot-animation-timing-function: ease-in-out;
+  --c-robot-animation-iteration-count: infinite;
+  --c-robot-animation-direction: alternate;
 }
 
 /*------------------------------------*\
@@ -43,6 +47,13 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--global-html-backgroundColor);
 }
 
 /*
@@ -133,15 +144,71 @@ body {
 */
 
 .c-robot {
+  max-width: 400px;
+  fill: var(--global-html-color);
 }
 
 .c-robot__shadow {
+  fill: var(--c-robot__shadow-fill, Black);
+  opacity: 0.1;
 }
-
+.c-robot--css-anim #Robot {
+  animation-name: robotHover;
+  animation-duration: var(--c-robot-animation-duration);
+  animation-timing-function: var(--c-robot-animation-timing-function);
+  animation-iteration-count: var(--c-robot-animation-iteration-count);
+  animation-direction: var(--c-robot-animation-direction);
+}
+.c-robot--css-anim #Shadow {
+  transform-origin: 50% 100%;
+  animation-name: shadowPulse;
+  animation-duration: var(--c-robot-animation-duration);
+  animation-timing-function: var(--c-robot-animation-timing-function);
+  animation-iteration-count: var(--c-robot-animation-iteration-count);
+  animation-direction: var(--c-robot-animation-direction);
+}
+@keyframes shadowPulse {
+  100% {
+    transform: scale(0.75);
+  }
+}
+@keyframes robotHover {
+  0% {
+    transform: translateY(2%);
+  }
+  100% {
+    transform: translateY(-2%);
+  }
+}
 
 /*
     Component: Controls
 */
+.c-controls__radio{
+  display: none;
+}
+.c-controls__list{
+  display: flex;
+  gap: 2.5rem;
+}
+.c-controls{
+  display: flex;
+  gap: 8rem;
+}
+.c-controls__button{
+  color:white
+}
+.c-controls__list input[type="radio"]:checked + label{
+  background-color: #0000001a;
+  padding: 8px 12px;
+  border-radius: 24px;
+}
+.c-controls__button--pause{
+  background-color: #0000001a;
+  padding: 10px 10px 8px;
+  border-radius: 100%;
+  margin-top: -5px;
+}
 
 /*------------------------------------*\
 #UTILITIES
